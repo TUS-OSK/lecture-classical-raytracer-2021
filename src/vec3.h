@@ -1,0 +1,166 @@
+#ifndef _VEC3_H
+#define _VEC3_H
+
+#include <cmath>
+#include <iostream>
+
+template <typename T>
+struct Vec3
+{
+	T v[3];
+
+	Vec3()
+	{
+		v[0] = 0;
+		v[1] = 0;
+		v[2] = 0;
+	}
+
+	Vec3(T in)
+	{
+		v[0] = in;
+		v[1] = in;
+		v[2] = in;
+	}
+
+	Vec3(T x, T y, T z)
+	{
+		v[0] = x;
+		v[1] = y;
+		v[2] = z;
+	}
+
+	T operator[](unsigned int i) const { return v[i]; }
+	T &operator[](unsigned int i) { return v[i]; }
+};
+
+template <typename T>
+inline Vec3<T> operator+(const Vec3<T> &a, const Vec3<T> &b)
+{
+	Vec3<T> ret;
+	for (int i = 0; i < 3; ++i)
+	{
+		ret[i] = a[i] + b[i];
+	}
+
+	return ret;
+}
+
+template <typename T>
+inline Vec3<T> operator-(const Vec3<T> &a, const Vec3<T> &b)
+{
+	Vec3<T> ret;
+	for (int i = 0; i < 3; ++i)
+	{
+		ret[i] = a[i] - b[i];
+	}
+
+	return ret;
+}
+
+// Vec3 * s  s* Vec3
+template <typename T>
+inline Vec3<T> operator*(const Vec3<T> &a, const T &s)
+{
+	Vec3<T> ret;
+	for (int i = 0; i < 3; i++)
+	{
+		ret[i] = a[i] * s;
+	}
+	return ret;
+}
+
+template <typename T>
+inline Vec3<T> operator*(const T &s, const Vec3<T> &a)
+{
+	Vec3<T> ret;
+	for (int i = 0; i < 3; i++)
+	{
+		ret[i] = a[i] * s;
+	}
+	return ret;
+}
+
+template <typename T>
+inline Vec3<T> operator/(const Vec3<T> &a, const T &s)
+{
+	Vec3<T> ret;
+	for (int i = 0; i < 3; i++)
+	{
+		ret[i] = a[i] / s;
+	}
+	return ret;
+}
+
+// s / Vec3
+template <typename T>
+inline Vec3<T> operator/(const T &s, const Vec3<T> &a)
+{
+	Vec3<T> ret;
+	for (int i = 0; i < 3; i++)
+	{
+		ret[i] = s / a[i];
+	}
+	return ret;
+}
+
+template <typename T>
+inline Vec3<T> operator*(const Vec3<T> &a, const Vec3<T> &b)
+{
+	Vec3<T> ret;
+	for (int i = 0; i < 3; i++)
+	{
+		ret[i] = a[i] * b[i];
+	}
+	return ret;
+}
+
+template <typename T>
+inline float nolm(const Vec3<T> &vec)
+{
+	float sum = 0;
+	for (int i = 0; i < 3; i++)
+	{
+		sum += vec[i] * vec[i];
+	}
+
+	return std::sqrt(sum);
+}
+
+template <typename T>
+inline float dot(const Vec3<T> &a, const Vec3<T> &b)
+{
+	float sum = 0;
+	for (int i = 0; i < 3; ++i)
+	{
+		sum += a[i] * b[i];
+	}
+	return sum;
+}
+
+template <typename T>
+inline Vec3<T> cross(const Vec3<T> &a, const Vec3<T> &b)
+{
+	Vec3<T> ret;
+	ret[0] = a[1] * b[2] - a[2] * b[1];
+	ret[1] = a[2] * b[0] - a[0] * b[2];
+	ret[2] = a[0] * b[1] - a[1] * b[0];
+
+	return ret;
+}
+
+template <typename T>
+inline Vec3<T> normalize(const Vec3<T> &v)
+{
+	return v / nolm(v);
+}
+
+template <typename T>
+inline std::ostream &operator<<(std::ostream &ost, const Vec3<T> &v)
+{
+	ost << "(" << v[0] << "," << v[1] << "," << v[2] << ")";
+	return ost;
+}
+
+using Vec3f = Vec3<float>;
+#endif
