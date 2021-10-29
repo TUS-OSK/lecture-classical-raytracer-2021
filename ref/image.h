@@ -92,5 +92,19 @@ public:
 			}
 		}
 	}
+
+	void reset()
+	{
+		for (int j = 0; j < height; ++j)
+		{
+			for (int i = 0; i < width; ++i)
+			{
+				const int idx = 3 * i + 3 * width * j;
+				pixel[idx] = 0;
+				pixel[idx + 1] = 0;
+				pixel[idx + 2] = 0;
+			}
+		}
+	}
 };
 #endif

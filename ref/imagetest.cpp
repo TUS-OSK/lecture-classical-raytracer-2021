@@ -5,8 +5,8 @@
 using namespace std;
 int main()
 {
-	const unsigned int width = 540;
-	const unsigned int height = 540;
+	const unsigned int width = 540 * 2;
+	const unsigned int height = 540 * 2;
 
 	pincamera camera(Vec3f(0.0f), Vec3f(0, 0, -1));
 	Image img(width, height);
