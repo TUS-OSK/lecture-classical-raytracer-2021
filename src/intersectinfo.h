@@ -1,8 +1,9 @@
 #pragma once
 
 #include "vec3.h"
+#include "shape.h"
 
-class Sphere;
+class Shape;
 
 struct IntersectInfo {
   //交差距離
@@ -12,5 +13,5 @@ struct IntersectInfo {
   //法線ベクトル
   Vec3f normal;
   //スフィアのポインタ
-  Sphere* sphere;
+  Shape* sphere;
 };

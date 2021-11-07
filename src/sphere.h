@@ -4,15 +4,9 @@
 #include "intersectinfo.h"
 #include "ray.h"
 #include "vec3.h"
+#include "shape.h"
 
-enum Material {
-  Diffuse,
-  Mirror,
-  Glass,
-  Emmition,
-};
-
-class Sphere {
+class Sphere: public Shape {
  private:
   Vec3f pos;
   float r;
@@ -27,7 +21,7 @@ class Sphere {
   Sphere(Vec3f p, float r, Material mat, Vec3f c)
       : pos(p), r(r), material(mat), color(c) {}
 
-  bool hit(const Ray &ray, IntersectInfo &info) {
+  bool hit(const Ray &ray, IntersectInfo &info) override{
     float b = dot(ray.direction, ray.origin - pos);
     float c = nolm2(ray.origin - pos) - (r * r);
 
@@ -58,6 +52,6 @@ class Sphere {
     return true;
   }
 
-  Material getMaterial() const { return material; }
-  Vec3f getColor() const { return color; }
+  Material getMaterial() const override{ return material; }
+  Vec3f getColor() const override{ return color; }
 };
